@@ -1,6 +1,27 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import os
+
+model_file_name = 'MultinomialNB.pkl'
+model_file_path = os.path.join(os.getcwd(), model_file_name)  # Get absolute path to the file
+
+if os.path.exists(model_file_path):
+    # Open the model file using the correct path
+    with open(model_file_path, 'rb') as f:
+        model = pickle.load(f)
+else:
+    # Handle case where file does not exist
+    raise FileNotFoundError(f"{model_file_name} not found at {model_file_path}")
+
+cv_file_name='CountVectorizer.pkl'
+cv_file_path=os.path.join(os.getcwd(), cv_file_name)
+
+if os.path.exists(cv_file_path):
+    with open(cv_file_name, 'rb') as f:
+        cv= pickle.load(f)
+else:
+    raise FileNotFoundError()
 
 spam_bg = '''
     <style>
@@ -33,8 +54,8 @@ page_bg = '''
 
 
 final=''
-model = pickle.load(open('MultinomialNB.pkl', 'rb'))
-cv = pickle.load(open('CountVectorizer.pkl','rb'))
+# model = pickle.load(open('MultinomialNB.pkl', 'rb'))
+# cv = pickle.load(open('CountVectorizer.pkl','rb'))
 ans=-1
 def predict(sentence):
     st.session_state.clicked = True
