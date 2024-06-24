@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import pickle
 import os
+import sklearn
 
 model_file_name = 'MultinomialNB.pkl'
 model_file_path = os.path.join(os.getcwd(), model_file_name)  # Get absolute path to the file
@@ -52,7 +53,7 @@ page_bg = '''
 '''
 # st.markdown(page_bg, unsafe_allow_html=True)
 
-
+print("Current working directory:", os.getcwd())
 final=''
 # model = pickle.load(open('MultinomialNB.pkl', 'rb'))
 # cv = pickle.load(open('CountVectorizer.pkl','rb'))
